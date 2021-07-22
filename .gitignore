@@ -1,0 +1,10 @@
+# .gitignore file
+
+# venv stuff
+env/
+
+# python stuff
+__pycache__/
+
+# testing
+local_testing.py
