@@ -1,26 +1,35 @@
 # Py-BayAreaFastrak
 
 ## Background
-Whenever we (Californians) drive past a Fastrak checkpoint during off hours or on the weekends, don't you always wonder 
-if the Fastrak corporation actually turned off the sensors* and did not charge you or whether your Fastrack tag is 
-actually registered. Finding Fastrak's backend and UI a bit antiquated? 
-
-Well, Py-BayAreaFastrak gives you
-a python API to parse said transactions allowing you to hook into whatever notification system you want/
+Py-BayAreaFastrak gives you a python API for your transactions on bayareafastrak.org allowing you to process the data or
+hook into whatever notification system you want.
 
 ## How
 To use the API, create a BayAreaFastrak client with your username and password and call the `get_transactions()` 
-function. Example:
+function. 
+
+Example:
 ```
 from fastrak import BayAreaFastrak
 client = BayAreaFastrak(username="some_user", password="123456")
 transactions = client.get_transactions()
+print(transactions[0])
+# {'post_date': '01/01/1970', 'transaction_date': '01/01/1970', 'transaction_time': '00:00:00 AM', 
+'tag_id': '12345678', 'description': 'Bay Bridge', 'debit': 6.0, 'credit': 0, 'net': 6.0, 'balance': 100}
 ```
 
-## Notes
-Given that the library is uses HTML parsing to achieve it's functionality, things are liable to 
-break. Please file issues when things do.
+### Requirements
+* Beautifulsoup4 
+```
+pip install beautifulsoup4
+```
+Note: For better or for worse, I plan to remove this dependency in the future and use my own parser so that there are 
+no external dependencies. Might be a bad idea, but bs4 seems a bit bloated for what I need to do and I've already 
+implemented a simple HTML parser for extracting the form token
 
+## Notes
+Given that the library parses HTML to achieve its functionality, things are liable to break if and when Bayareafastrak 
+changes their interface so please file issues if something is not working as expected
 
 ## Contributions
 Any contributions are welcome. Please make a PR with any proposed changes.
@@ -28,20 +37,21 @@ Any contributions are welcome. Please make a PR with any proposed changes.
 ## TODO
 ### Relatively important
 * Handle site session longevity
-  * it's untested how long the authenticated session lasts for
-* Add date searching functionality
-  *Make `get_transactions()` a generator to yield new results whenever they are loaded
+  * It's untested how long the authenticated session lasts for
+* Convert transaction date to Python timestamp
+* Add date filtering functionality
+* Make `get_transactions()` a generator to yield new results whenever transactions show up
 * Replace BeautifulSoup stuff with vanilla Python?
-  * Maybe use a naive version of HtmlElParser
+  * Maybe use HtmlElParser
     * slower and less pretty but fewer dependencies
 
 ### Kinda important
-* Publish to pypi while I still have a unique name
+* Publish to pypi while I still have a unique name for the repo
 * Add a Dockerfile
 * Add a HTTP server to expose this as an API
   
 ### Not important
-* figure out how to use an asterisk in markdown lol
+* Figure out how to use an asterisk in markdown lol
 
 ## Footnotes
 *: apparently newer Fastrak flex modules don't even beep anymore
