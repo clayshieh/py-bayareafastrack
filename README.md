@@ -3,8 +3,10 @@
 ## Background
 Whenever we (Californians) drive past a Fastrak checkpoint during off hours or on the weekends, don't you always wonder 
 if the Fastrak corporation actually turned off the sensors* and did not charge you or whether your Fastrack tag is 
-actually registered. Finding Fastrak's backend and UI a bit antiquated? Well fear not, Py-BayAreaFastrak gives you
-a python API to parse said transactions allowing you to hook into whatever notification system you want!
+actually registered. Finding Fastrak's backend and UI a bit antiquated? 
+
+Well, Py-BayAreaFastrak gives you
+a python API to parse said transactions allowing you to hook into whatever notification system you want/
 
 ## How
 To use the API, create a BayAreaFastrak client with your username and password and call the `get_transactions()` 
