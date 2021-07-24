@@ -26,12 +26,12 @@ Any contributions are welcome. Please make a PR with any proposed changes.
 ## TODO
 ### Relatively important
 * Handle site session longevity
-  * it's untested how long the authenticated sesion lasts for
+  * it's untested how long the authenticated session lasts for
 * Add date searching functionality
   *Make `get_transactions()` a generator to yield new results whenever they are loaded
 * Replace BeautifulSoup stuff with vanilla Python?
   * Maybe use a naive version of HtmlElParser
-    * slower and less pretty but less dependencies
+    * slower and less pretty but fewer dependencies
 
 ### Kinda important
 * Publish to pypi while I still have a unique name
