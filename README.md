@@ -14,8 +14,9 @@ from fastrak import BayAreaFastrak
 client = BayAreaFastrak(username="some_user", password="123456")
 transactions = client.get_transactions()
 print(transactions[0])
-# {'post_date': '01/01/1970', 'transaction_date': '01/01/1970', 'transaction_time': '00:00:00 AM', 
-'tag_id': '12345678', 'description': 'Bay Bridge', 'debit': 6.0, 'credit': 0, 'net': 6.0, 'balance': 100}
+# {'post_datetime': datetime.datetime(2000, 1, 1, 1, 1, 1), 
+'transaction_datetime': datetime.datetime(2000, 1, 1, 1, 1, 1), 'tag_id': '12345678', 'description': 'Bay Bridge',
+ 'debit': 6.0, 'credit': 0.0, 'net': 6.0, 'balance': 100}
 ```
 
 ### Requirements
@@ -32,13 +33,15 @@ Given that the library parses HTML to achieve its functionality, things are liab
 changes their interface so please file issues if something is not working as expected
 
 ## Contributions
-Any contributions are welcome. Please make a PR with any proposed changes.
+Any contributions are welcome. Because testing would literally cost money and time, please submit issues with cleaned 
+data to help out! 
+
+Please make a PR with any proposed changes.
 
 ## TODO
 ### Relatively important
 * Handle site session longevity
   * It's untested how long the authenticated session lasts for
-* Convert transaction date to Python timestamp
 * Add date filtering functionality
 * Make `get_transactions()` a generator to yield new results whenever transactions show up
 * Replace BeautifulSoup stuff with vanilla Python?

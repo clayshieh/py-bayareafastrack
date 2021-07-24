@@ -1,3 +1,4 @@
+from datetime import datetime
 from html.parser import HTMLParser
 import logging
 import re
@@ -11,6 +12,7 @@ logger = logging.getLogger(__name__)
 
 class HtmlEl(object):
     """HtmlEl is a structure that holds the raw information from HtmlElParser"""
+
     def __init__(self, tag, attrs=None):
         self.tag = tag
         self.attrs = attrs
@@ -21,6 +23,7 @@ class HtmlElParser(HTMLParser):
     """
     HtmlElParser is a basic python html parser that implements some search functionality to find the correct element
     """
+
     def __init__(self, tag, key=None):
         super().__init__()
         self.toi = tag
@@ -49,14 +52,17 @@ class BayAreaFastrak(object):
     """BayAreaFastrak implements a client for other libraries to query the transaction records"""
 
     class Transaction(object):
+        post_datetime_format = "%m/%d/%Y"
+        transaction_datetime_format = "%m/%d/%Y %I:%M:%S %p"
+
         def __init__(self, post_date, transaction_date, transaction_time, tag_id, description, debit, credit, balance):
-            self.post_date = post_date
-            self.transaction_date = transaction_date
-            self.transaction_time = transaction_time
+            self.post_datetime = datetime.strptime(post_date, BayAreaFastrak.Transaction.post_datetime_format)
+            self.transaction_datetime = datetime.strptime(f"{transaction_date} {transaction_time}",
+                                                          BayAreaFastrak.Transaction.transaction_datetime_format)
             self.tag_id = tag_id
             self.description = description
-            self.debit = format_currency(debit) if debit else 0
-            self.credit = format_currency(credit) if credit else 0
+            self.debit = format_currency(debit) if debit else 0.0
+            self.credit = format_currency(credit) if credit else 0.0
             self.net = self.debit - self.credit
             self.balance = format_currency(balance)
 
@@ -132,9 +138,7 @@ class BayAreaFastrak(object):
 
 
 # Helper functions
-# Pretty sure this doesn't matter, fastrak is only a norcal/US thing
 def format_currency(currency_data: str) -> float:
-    # TODO: find a better way to do this
     remove_characters = ["$", "(", ")"]
     ret = ""
     for c in currency_data:
