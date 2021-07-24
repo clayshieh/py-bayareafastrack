@@ -29,18 +29,18 @@ class HtmlElParser(HTMLParser):
         self.results = list()
         self.el = None
 
-    def handle_starttag(self, tag, attrs):
+    def handle_starttag(self, tag, attrs) -> None:
         if tag == self.toi:
             self.el = HtmlEl(tag, attrs)
 
-    def handle_endtag(self, tag):
+    def handle_endtag(self, tag) -> None:
         if tag == self.toi and self.el:
             # either no check or check passes
             if self.key is None or self.key is not None and self.key(self.el):
                 self.results.append(self.el)
             self.el = None
 
-    def handle_data(self, data):
+    def handle_data(self, data) -> None:
         if self.el:
             self.el.data = data
 
@@ -71,7 +71,7 @@ class BayAreaFastrak(object):
         # init functions
         self.login()
 
-    def login(self, remember_me=False):
+    def login(self, remember_me=False) -> None:
         logger.info("Attempting to login to bayareafastrak.org...")
         url = "https://www.bayareafastrak.org/vector/account/home/accountLogin.do"
         params = {
