@@ -26,16 +26,20 @@ Any contributions are welcome. Please make a PR with any proposed changes.
 ## TODO
 ### Relatively important
 * Handle site session longevity
-    * it's untested how long the authenticated sesion lasts for
-* Make `get_transactions()` a generator to yield new results whenever they are loaded
-* Replace some of the BeautifulSoup stuff with vanilla Python?
+  * it's untested how long the authenticated sesion lasts for
+* Add date searching functionality
+  *Make `get_transactions()` a generator to yield new results whenever they are loaded
+* Replace BeautifulSoup stuff with vanilla Python?
+  * Maybe use a naive version of HtmlElParser
+    * slower and less pretty but less dependencies
 
 ### Kinda important
 * Publish to pypi while I still have a unique name
-* Add a Dockerfile and HTTP server to expose this as an API
+* Add a Dockerfile
+* Add a HTTP server to expose this as an API
   
 ### Not important
-* figure out how to use an asterick in markdown lol
+* figure out how to use an asterisk in markdown lol
 
 ## Footnotes
 *: apparently newer Fastrak flex modules don't even beep anymore
