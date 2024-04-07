@@ -2,9 +2,12 @@
 
 # venv stuff
 env/
+.DS_Store
 
 # python stuff
 __pycache__/
+__init__.py
 
 # testing
+main.py
 local_testing.py
